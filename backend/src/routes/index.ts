@@ -1,0 +1,43 @@
+import { Router } from "express";
+import { authRouter } from "../modules/auth/routes/auth.routes";
+import { departmentRouter } from "../modules/organization/departments/department.routes";
+import { roleRouter } from "../modules/organization/roles/role.routes";
+import { userRouter } from "../modules/organization/users/user.routes";
+import { statsRouter } from "../modules/organization/stats/stats.routes";
+import { projectRouter } from "../modules/operations/projects/project.routes";
+import { taskRouter } from "../modules/operations/tasks/task.routes";
+import { leaveRouter } from "../modules/operations/leaves/leave.routes";
+import { attendanceRouter } from "../modules/operations/attendance/attendance.routes";
+import { announcementRouter } from "../modules/enterprise/announcements/announcement.routes";
+import { discussionRouter } from "../modules/enterprise/discussions/discussion.routes";
+import { eventRouter } from "../modules/enterprise/events/event.routes";
+import { ticketRouter } from "../modules/enterprise/tickets/ticket.routes";
+import { salaryRouter } from "../modules/enterprise/salary/salary.routes";
+import { notificationRouter } from "../modules/enterprise/notifications/notification.routes";
+import { auditRouter } from "../modules/enterprise/audit/audit.routes";
+import { activityRouter } from "../modules/enterprise/activities/activity.routes";
+import { uploadRouter } from "../modules/shared/uploads/upload.routes";
+
+export function buildV1Router(): Router {
+  const router = Router();
+  router.get("/health", (_req, res) => res.json({ success: true, data: { status: "ok" } }));
+  router.use("/auth", authRouter);
+  router.use("/departments", departmentRouter);
+  router.use("/roles", roleRouter);
+  router.use("/users", userRouter);
+  router.use("/stats", statsRouter);
+  router.use("/projects", projectRouter);
+  router.use("/tasks", taskRouter);
+  router.use("/leaves", leaveRouter);
+  router.use("/attendance", attendanceRouter);
+  router.use("/announcements", announcementRouter);
+  router.use("/discussions", discussionRouter);
+  router.use("/events", eventRouter);
+  router.use("/tickets", ticketRouter);
+  router.use("/salary-slips", salaryRouter);
+  router.use("/notifications", notificationRouter);
+  router.use("/audit-logs", auditRouter);
+  router.use("/activities", activityRouter);
+  router.use("/uploads", uploadRouter);
+  return router;
+}
